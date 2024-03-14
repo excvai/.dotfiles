@@ -1,0 +1,33 @@
+#!/bin/sh
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(find ~/Projects/** -mindepth 1 -maxdepth 1 -type d | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+
+# Check if the session already exists
+if tmux has-session -t=$selected_name 2> /dev/null; then
+    # If we're not in tmux, attach to the session
+    if [[ -z $TMUX ]]; then
+        tmux attach -t $selected_name
+    # If we're in tmux, switch to the session
+    else
+        tmux switch-client -t $selected_name
+    fi
+else 
+    # If we're not in tmux, create the session and attach to it
+    if [[ -z $TMUX ]]; then
+        tmux new-session -s $selected_name -c $selected
+    # If we're in tmux, create the session and switch to it
+    else
+        tmux new-session -s $selected_name -c $selected -d
+        tmux switch-client -t $selected_name
+    fi
+fi
