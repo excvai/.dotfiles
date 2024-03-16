@@ -69,6 +69,9 @@ return {
       keymap.set("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ float = { border = "rounded" }})<CR>', opts)
       opts.desc = "Show documentation for what is under cursor"
       keymap.set("n", "K", vim.lsp.buf.hover, opts)
+      opts.desc = "Show LSP signature help"
+      keymap.set("n", "<C-s>", "<cmd>LspOverloadsSignature<CR>", opts)
+      keymap.set("i", "<C-s>", "<cmd>LspOverloadsSignature<CR>", opts)
     end
     local highlight_symbol = function(client, bufnr)
       -- Set autocommands conditional on server_capabilities
@@ -106,7 +109,7 @@ return {
             previous_signature = "<Up>",
             next_parameter = "<Right>",
             previous_parameter = "<Left>",
-            close_signature = "<C-Space>",
+            close_signature = "<C-s>",
           },
         })
       end

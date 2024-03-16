@@ -44,15 +44,16 @@ return {
         -- disable due to a bug (https://github.com/windwp/nvim-ts-autotag/issues/125)
         enable_close_on_slash = false,
       },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      },
+      -- Disable as C-Space is used for tmux
+      -- incremental_selection = {
+      --   enable = true,
+      --   keymaps = {
+      --     init_selection = "<C-space>",
+      --     node_incremental = "<C-space>",
+      --     scope_incremental = false,
+      --     node_decremental = "<bs>",
+      --   },
+      -- },
     })
   end,
 }
