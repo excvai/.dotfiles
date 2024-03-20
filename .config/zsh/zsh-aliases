@@ -24,7 +24,8 @@ alias vl='NVIM_APPNAME=nvim-lazy nvim'
 
 # speed up git workflow
 alias g='git'
-alias gl='lazygit'
+# Use bin instead of an alias in order to fix the error with symlinked directories
+# alias gl='lazygit'
 
 # manage dotfiles with bare repo
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"

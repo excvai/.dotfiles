@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+# Fix for lazygit not working with symlinks
+
+cd "$(readlink -f .)" || exit
+lazygit "$@"
+cd - || exit
