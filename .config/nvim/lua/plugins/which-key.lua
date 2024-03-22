@@ -90,7 +90,7 @@ return {
       ["e"] = { "<cmd>Neotree toggle<cr>", "Explorer" },
       ["w"] = { "<cmd>w<CR>", "Save" },
       ["q"] = { "<cmd>qa<CR>", "Quit Neovim" },
-      ["Q"] = { "<cmd>q<CR>", "Close window" },
+      ["x"] = { "<cmd>q<CR>", "Close window" },
       ["c"] = { "<cmd>Bdelete<CR>", "Close Buffer" },
       ["C"] = { "<cmd>Ba<CR>", "Close All Buffers" },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
