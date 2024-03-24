@@ -1,7 +1,7 @@
 -- Set options
 local options = {
   number = true, -- set numbered lines
-  relativenumber = true, -- set relative numbered lines
+  -- relativenumber = true, -- set relative numbered lines
 
   -- Use two spaces indentation
   tabstop = 2,
