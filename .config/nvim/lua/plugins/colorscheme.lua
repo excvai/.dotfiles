@@ -10,6 +10,8 @@ return {
       },
       highlight_groups = {
         Comment = { italic = true },
+        Visual = { bg = "#2E3C64" },
+        -- For flash plugin
         FlashBackdrop = {
           fg = "#545c7e",
         },

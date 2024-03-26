@@ -302,7 +302,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "h",
+                                        "key_code": "tab",
                                         "modifiers": [
                                             "left_command"
                                         ]
