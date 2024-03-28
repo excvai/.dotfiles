@@ -1,28 +1,37 @@
 return {
-  "rose-pine/neovim",
-  name = "rose-pine",
-  lazy = false,
-  priority = 1000,
-  config = function()
-    require("rose-pine").setup({
-      styles = {
-        italic = false,
-      },
-      highlight_groups = {
-        Comment = { italic = true },
-        Visual = { bg = "#2E3C64" },
-        -- For flash plugin
-        FlashBackdrop = {
-          fg = "#545c7e",
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("rose-pine").setup({
+        styles = {
+          italic = false,
         },
-        FlashLabel = {
-          bg = "#ff007c",
-          bold = true,
-          fg = "#c0caf5",
+        highlight_groups = {
+          Comment = { italic = true },
+          Visual = { bg = "#2E3C64" },
+          -- For flash plugin
+          FlashBackdrop = {
+            fg = "#545c7e",
+          },
+          FlashLabel = {
+            bg = "#ff007c",
+            bold = true,
+            fg = "#c0caf5",
+          },
         },
-      },
-    })
+      })
 
-    vim.cmd.colorscheme("rose-pine-moon")
-  end,
+      vim.cmd.colorscheme("rose-pine-moon")
+    end,
+  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 }
