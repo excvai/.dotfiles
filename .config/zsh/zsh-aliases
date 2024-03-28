@@ -5,7 +5,6 @@ alias f='zi'
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
 # alias code='codium'
 alias sxiv='sxiv -b'
-alias open='xdg-open'
 alias ncmp="ncmpcpp"
 alias wine32="WINEPREFIX=~/.local/share/wineprefixes/bottle32 wine"
 alias wine64="WINEPREFIX=~/.local/share/wineprefixes/bottle64 wine"
@@ -87,6 +86,7 @@ Darwin)
 
 Linux)
 	# alias ls="ls --group-directories-first --color=auto"
+	alias open='xdg-open'
 	;;
 
 CYGWIN* | MINGW32* | MSYS* | MINGW*)
