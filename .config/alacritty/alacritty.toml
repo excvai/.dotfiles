@@ -54,6 +54,12 @@ chars = "\u001B[13;2u"
 key = "Return"
 mods = "Shift"
 
+# Fix Ctrl+6 not working in tmux on MacOS
+[[keyboard.bindings]]
+chars = "\u001b[54;5u"
+key = "Key6"
+mods = "Control"
+
 [mouse]
 hide_when_typing = true
 
