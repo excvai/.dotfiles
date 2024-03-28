@@ -63,18 +63,8 @@ bindkey "^j" down-line-or-beginning-search # Down
 bindkey -r "^u"
 bindkey -r "^d"
 
-# FZF 
-# Use local fzf/* files as there are no /usr/share/fzf/... on MacOS
-source $HOME/.config/zsh/fzf/completion.zsh
-source $HOME/.config/zsh/fzf/key-bindings.zsh
-# [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-# [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
-[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
-[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f $ZDOTDIR/completion/_fnm ] && fpath+="$ZDOTDIR/completion/"
-# export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
-compinit
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --zsh)"
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
