@@ -36,6 +36,10 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
+    vim.diagnostic.config({
+      severity_sort = true,
+    })
+
     -- Add borders to the LSP floating windows
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
     vim.lsp.handlers["textDocument/signatureHelp"] =
