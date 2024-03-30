@@ -15,6 +15,7 @@ return {
         "bash",
         "json",
         "javascript",
+        "jsdoc",
         "typescript",
         "tsx",
         "yaml",
@@ -26,6 +27,7 @@ return {
         "rust",
         "markdown",
         "markdown_inline",
+        "comment", -- for comment tags like TODO, FIXME(user)
       },
       highlight = {
         enable = true,
