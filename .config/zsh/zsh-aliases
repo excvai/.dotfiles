@@ -11,6 +11,7 @@ alias wine64="WINEPREFIX=~/.local/share/wineprefixes/bottle64 wine"
 alias calc="eva"
 alias ls="eza --group-directories-first"
 alias ll="ls -alhF"
+alias ta="tmux attach"
 
 # Vim aliases
 alias v='nvim'
