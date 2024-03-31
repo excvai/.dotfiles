@@ -27,7 +27,8 @@ return {
         "rust",
         "markdown",
         "markdown_inline",
-        "comment", -- for comment tags like TODO, FIXME(user)
+        -- Disable due to performance issues
+        -- "comment", -- for comment tags like TODO, FIXME(user)
       },
       highlight = {
         enable = true,
