@@ -1,3 +1,17 @@
+-- Determines the colorscheme variant to be used based on the system theme
+vim.cmd([[
+if has("mac")
+  let output =  system("defaults read -g AppleInterfaceStyle")
+  if v:shell_error != 0
+    set background=light
+  else    
+    set background=dark
+  endif
+else
+  set background=dark
+endif
+]])
+
 return {
   {
     "rose-pine/neovim",
@@ -6,12 +20,14 @@ return {
     priority = 1000,
     config = function()
       require("rose-pine").setup({
+        variant = "auto", -- auto, main, moon, or dawn
+        dark_variant = "moon", -- main, moon, or dawn
         styles = {
           italic = false,
+          bold = false,
         },
         highlight_groups = {
           Comment = { italic = true },
-          Visual = { bg = "#2E3C64" },
           -- For flash plugin
           FlashBackdrop = {
             fg = "#545c7e",
@@ -22,9 +38,20 @@ return {
             fg = "#c0caf5",
           },
         },
+        -- Use different background for Visual mode depending on the light/dark variant
+        before_highlight = function(group, highlight, palette)
+          local moonBase = "#232136"
+          local mainBase = "#191724"
+          local dawnBase = "#faf4ed"
+          if group == "Visual" and (palette.base == moonBase or palette.base == mainBase) then
+            highlight.bg = "#2E3C64"
+          elseif group == "Visual" and palette.base == dawnBase then
+            highlight.bg = "#ADD6FF"
+          end
+        end,
       })
 
-      vim.cmd.colorscheme("rose-pine-moon")
+      vim.cmd.colorscheme("rose-pine")
     end,
   },
   {
