@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Toggle between rose-pine-dawn and rose-pine-moon themes in alacritty config
+
+ALACRITTY_CONFIG_PATH=~/.config/alacritty/alacritty.toml
+TMUX_CONFIG_PATH=~/.config/tmux/tmux.conf
+
+theme="$1"
+if [ -z "$theme" ]; then
+  if grep -q rose-pine-dawn $ALACRITTY_CONFIG_PATH; then
+    theme="Dark"
+  elif grep -q rose-pine-moon $ALACRITTY_CONFIG_PATH; then
+    theme="Light"
+  fi
+fi
+
+if [ "$theme" == "Light" ]; then
+  sed -i "" "s/rose-pine-moon/rose-pine-dawn/" $ALACRITTY_CONFIG_PATH
+  # sed -i "" 's/decorations_theme_variant = "dark"/decorations_theme_variant = "light"/' $CONFIG_PATH &&
+  sed -i "" "s/set -g @rose_pine_variant 'moon'/set -g @rose_pine_variant 'dawn'/" $TMUX_CONFIG_PATH
+  tmux source-file $TMUX_CONFIG_PATH
+elif [ "$theme" == "Dark" ]; then
+  sed -i "" "s/rose-pine-dawn/rose-pine-moon/" $ALACRITTY_CONFIG_PATH
+  # sed -i "" 's/decorations_theme_variant = "light"/decorations_theme_variant = "dark"/' $CONFIG_PATH &&
+  sed -i "" "s/set -g @rose_pine_variant 'dawn'/set -g @rose_pine_variant 'moon'/" $TMUX_CONFIG_PATH
+  tmux source-file $TMUX_CONFIG_PATH
+fi
