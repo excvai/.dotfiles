@@ -244,6 +244,33 @@ return {
           },
         })
       end,
+      ["cssls"] = function()
+        require("lspconfig")["cssls"].setup({
+          on_attach = on_attach,
+          capabilities = capabilities,
+          settings = {
+            css = {
+              validate = true,
+              lint = {
+                -- Disable lint warnings for @tailwind directive
+                unknownAtRules = "ignore",
+              },
+            },
+            scss = {
+              validate = true,
+              lint = {
+                unknownAtRules = "ignore",
+              },
+            },
+            less = {
+              validate = true,
+              lint = {
+                unknownAtRules = "ignore",
+              },
+            },
+          },
+        })
+      end,
     })
   end,
 }
