@@ -83,6 +83,13 @@ case "$(uname -s)" in
 Darwin)
 	# echo 'Mac OS X'
 	# alias ls='ls -G'
+	# Set the terminal colorscheme to light or dark depending on the system appearance
+	appearance=$(defaults read -g AppleInterfaceStyle 2>/dev/null)
+	if [ "$appearance" = "Dark" ]; then
+		toggle-theme "Dark"
+	else
+		toggle-theme "Light"
+	fi
 	;;
 
 Linux)
