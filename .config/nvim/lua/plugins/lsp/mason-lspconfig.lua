@@ -124,7 +124,7 @@ return {
       highlight_symbol(client, bufnr)
       lsp_overloads(client)
       -- Disable built-in LSP formatters for some servers (to prevent conflicts with none-ls formatters)
-      local disable_lsp_formatting = { "tsserver", "lua_ls" }
+      local disable_lsp_formatting = { "tsserver", "lua_ls", "jsonls", "html" }
       for _, v in pairs(disable_lsp_formatting) do
         if client.name == v then
           client.server_capabilities.documentFormattingProvider = false

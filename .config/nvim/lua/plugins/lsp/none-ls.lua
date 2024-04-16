@@ -28,7 +28,7 @@ return {
       sources = {
         formatting.prettierd.with({
           extra_filetypes = { "svelte" },
-          disabled_filetypes = { "html", "json" },
+          -- disabled_filetypes = { "html" },
         }), -- js/ts formatter
         formatting.stylua, -- lua formatter
         diagnostics.eslint_d.with({ -- js/ts linter
