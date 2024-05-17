@@ -18,8 +18,8 @@ local options = {
 
   termguicolors = true,
 
-  scrolloff = 4,
-  sidescrolloff = 4,
+  scrolloff = 8,
+  sidescrolloff = 8,
 
   timeoutlen = 500, -- time in milliseconds to wait for a mapped sequence to complete
   updatetime = 300, -- faster completion
