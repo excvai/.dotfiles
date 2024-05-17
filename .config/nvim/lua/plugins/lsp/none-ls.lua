@@ -8,7 +8,7 @@ return {
 
     require("mason-null-ls").setup({
       ensure_installed = {
-        "prettierd", -- prettier formatter
+        -- "prettierd", -- prettier formatter
         "stylua", -- lua formatter
         "eslint_d", -- js linter
       },
@@ -26,7 +26,7 @@ return {
       root_dir = require("null-ls.utils").root_pattern(".null-ls-root", "Makefile", ".git", "package.json"),
       -- setup formatters & linters
       sources = {
-        formatting.prettierd.with({
+        formatting.prettier.with({
           extra_filetypes = { "svelte" },
           -- disabled_filetypes = { "html" },
         }), -- js/ts formatter
