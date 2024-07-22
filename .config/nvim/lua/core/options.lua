@@ -28,6 +28,8 @@ local options = {
 
   showmode = false, -- disable because we have lualine
 
+  inccommand = "split", -- shows a split window with matched lines when performing a substitution
+
   ignorecase = true, -- ignore case in search patterns
   smartcase = true, -- smart case
 
