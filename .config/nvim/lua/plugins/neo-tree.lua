@@ -29,6 +29,12 @@ return {
           "README.md",
           "next-env.d.ts",
         },
+        always_show = {
+          ".config",
+        },
+        never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
+          ".DS_Store",
+        },
       },
     },
   },
