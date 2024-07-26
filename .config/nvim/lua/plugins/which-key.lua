@@ -93,6 +93,7 @@ return {
       ["x"] = { "<cmd>q<CR>", "Close window" },
       ["c"] = { "<cmd>Bdelete<CR>", "Close Buffer" },
       ["C"] = { "<cmd>Ba<CR>", "Close All Buffers" },
+      ["u"] = { "<cmd>UndotreeToggle<CR>", "UndoTree toggle" },
       ["f"] = {
         "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
         "Find File",
