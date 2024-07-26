@@ -35,7 +35,9 @@ return {
     -- Load basic friendly snippets
     require("luasnip.loaders.from_vscode").lazy_load()
     -- Load custom local snippets
-    require("plugins.nvim-cmp.custom-snippets")
+    for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/plugins/nvim-cmp/snippets/*.lua", true)) do
+      loadfile(ft_path)()
+    end
 
     cmp.setup({
       snippet = {
@@ -52,6 +54,7 @@ return {
         ["<C-p>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = false }), -- accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
         ["<C-l>"] = cmp.mapping(function(fallback)
           if luasnip.expandable() then
             luasnip.expand()
