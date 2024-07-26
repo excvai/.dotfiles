@@ -1,5 +1,6 @@
 return {
   "mattn/emmet-vim",
+  enabled = false,
   -- Specify user_emmet_mode variable on startup. It won't work inside a config function
   init = function()
     vim.api.nvim_set_var("user_emmet_mode", "i") -- only enable insert mode functions
