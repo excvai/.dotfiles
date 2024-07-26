@@ -4,6 +4,15 @@ return {
   config = function()
     require("nvim-treesitter.configs").setup({
       textobjects = {
+        lsp_interop = {
+          enable = true,
+          border = "none",
+          floating_preview_opts = {},
+          peek_definition_code = {
+            ["<leader>df"] = "@function.outer",
+            ["<leader>dF"] = "@class.outer",
+          },
+        },
         select = {
           enable = true,
 
@@ -11,6 +20,8 @@ return {
           lookahead = true,
 
           keymaps = {
+            ["iT"] = { query = "@jsx.inner", desc = "Select inner part of a jsx tag" },
+
             -- You can use the capture groups defined in textobjects.scm
             ["a="] = { query = "@assignment.outer", desc = "Select outer part of an assignment" },
             ["i="] = { query = "@assignment.inner", desc = "Select inner part of an assignment" },
