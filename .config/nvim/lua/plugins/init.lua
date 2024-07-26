@@ -5,5 +5,6 @@ return {
   "tpope/vim-surround",
   "psliwka/vim-smoothie",
   "tpope/vim-sleuth", -- heuristically set buffer options (mostly for indenting)
-  "tpope/vim-fugitive"
+  "tpope/vim-fugitive",
+  "mbbill/undotree"
 }
