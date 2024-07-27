@@ -47,7 +47,7 @@ return {
         -- disable due to a bug (https://github.com/windwp/nvim-ts-autotag/issues/125)
         enable_close_on_slash = false,
       },
-      -- Disable as C-Space is used for tmux
+      -- Disable incremental_selection since C-Space is used for tmux
       -- incremental_selection = {
       --   enable = true,
       --   keymaps = {
