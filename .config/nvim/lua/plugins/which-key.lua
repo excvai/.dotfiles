@@ -1,203 +1,107 @@
 return {
   "folke/which-key.nvim",
+  event = "VeryLazy",
+  keys = {
+    {
+      "<leader>?",
+      function()
+        require("which-key").show({ global = false })
+      end,
+      desc = "Buffer Local Keymaps (which-key)",
+    },
+  },
   config = function()
-    local status_ok, which_key = pcall(require, "which-key")
-    if not status_ok then
-      vim.notify("which_key require failed")
-      return
-    end
+    local wk = require("which-key")
 
-    local setup = {
-      plugins = {
-        marks = true, -- shows a list of your marks on ' and `
-        registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-        spelling = {
-          enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-          suggestions = 20, -- how many suggestions should be shown in the list?
-        },
-        -- the presets plugin, adds help for a bunch of default keybindings in Neovim
-        -- No actual key bindings are created
-        presets = {
-          operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-          motions = true, -- adds help for motions
-          text_objects = true, -- help for text objects triggered after entering an operator
-          windows = true, -- default bindings on <c-w>
-          nav = true, -- misc bindings to work with windows
-          z = true, -- bindings for folds, spelling and others prefixed with z
-          g = true, -- bindings for prefixed with g
-        },
-      },
-      -- add operators that will trigger motion and text object completion
-      -- to enable all native operators, set the preset / operators plugin above
-      -- operators = { gc = "Comments" },
-      key_labels = {
-        -- override the label used to display some keys. It doesn't effect WK in any other way.
-        -- For example:
-        -- ["<space>"] = "SPC",
-        -- ["<cr>"] = "RET",
-        -- ["<tab>"] = "TAB",
-      },
-      icons = {
-        breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-        separator = "➜", -- symbol used between a key and it's label
-        group = "+", -- symbol prepended to a group
-      },
-      popup_mappings = {
-        scroll_down = "<c-d>", -- binding to scroll down inside the popup
-        scroll_up = "<c-u>", -- binding to scroll up inside the popup
-      },
-      window = {
-        border = "rounded", -- none, single, double, shadow
-        position = "bottom", -- bottom, top
-        margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-        padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-        winblend = 0,
-      },
-      layout = {
-        height = { min = 4, max = 25 }, -- min and max height of the columns
-        width = { min = 20, max = 50 }, -- min and max width of the columns
-        spacing = 3, -- spacing between columns
-        align = "left", -- align columns left, center or right
-      },
-      ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
-      hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-      show_help = true, -- show help message on the command line when the popup is visible
-      triggers = "auto", -- automatically setup triggers
-      -- triggers = {"<leader>"} -- or specify a list manually
-      triggers_blacklist = {
-        -- list of mode / prefixes that should never be hooked by WhichKey
-        -- this is mostly relevant for key maps that start with a native binding
-        -- most people should not need to change this
-        i = { "j", "k" },
-        v = { "j", "k" },
-      },
-    }
+    wk.setup({
+      -- Disable icons
+      icons = { mappings = false },
+    })
 
-    local opts = {
-      mode = "n", -- NORMAL mode
-      prefix = "<leader>",
-      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-      silent = true, -- use `silent` when creating keymaps
-      noremap = true, -- use `noremap` when creating keymaps
-      nowait = true, -- use `nowait` when creating keymaps
-    }
-
-    local mappings = {
-      ["b"] = {
-        "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false, sort_mru = true, ignore_current_buffer = true})<cr>",
-        "Buffers",
+    wk.add({
+      {
+        "<leader>b",
+        "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false, sort_mru = true, ignore_current_buffer = true})<CR>",
+        desc = "Buffers",
       },
-      ["e"] = { "<cmd>Neotree toggle<cr>", "Explorer" },
-      ["w"] = { "<cmd>w<CR>", "Save" },
-      ["q"] = { "<cmd>qa<CR>", "Quit Neovim" },
-      ["x"] = { "<cmd>q<CR>", "Close window" },
-      ["c"] = { "<cmd>Bdelete<CR>", "Close Buffer" },
-      ["C"] = { "<cmd>Ba<CR>", "Close All Buffers" },
-      ["u"] = { "<cmd>UndotreeToggle<CR>", "UndoTree toggle" },
-      ["f"] = {
-        "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-        "Find File",
+      { "<leader>e", "<cmd>Neotree toggle<CR>", desc = "Explorer" },
+      { "<leader>w", "<cmd>w<CR>", desc = "Save" },
+      { "<leader>q", "<cmd>qa<CR>", desc = "Quit Neovim" },
+      { "<leader>x", "<cmd>q<CR>", desc = "Close window" },
+      { "<leader>c", "<cmd>Bdelete<CR>", desc = "Close Buffer" },
+      { "<leader>C", "<cmd>Ba<CR>", desc = "Close All Buffers" },
+      { "<leader>u", "<cmd>UndotreeToggle<CR>", desc = "UndoTree toggle" },
+      {
+        "<leader>f",
+        "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<CR>",
+        desc = "Find file",
       },
-      ["o"] = { ':<C-u>call append(line("."), repeat([""], v:count1))<cr>', "New Line" },
-      ["p"] = { "<cmd>Lazy<CR>", "Plugins" },
-      [";"] = { "<cmd>Alpha<cr>", "Dashboard" },
+      { "<leader>o", ':<C-u>call append(line("."), repeat([""], v:count1))<CR>', desc = "New Line" },
+      { "<leader>p", "<cmd>Lazy<CR>", desc = "Plugins" },
+      { "<leader>;", "<cmd>Alpha<CR>", desc = "Dashboard" },
 
-      a = {
-        name = "Additional",
-        d = { "<cmd>cd %:h<cr>", "CD to opened file's dir" },
-        r = { "yiw:.,$s:<C-r>0::Igc<left><left><left><left>", "Replace repetitive words" },
-        R = { "yiw:.,$s:<C-r>0:<C-r>0:Igc<left><left><left><left>", "Rename repetitive words" },
-        h = { "<cmd>ColorizerToggle<cr>", "Toggle colorizer" },
-        ["/"] = { "/[\\u0401\\u0451\\u0410-\\u044f]<cr>", "Highlight russian characters" },
-      },
+      { "<leader>a", group = "Additional" },
+      { "<leader>ad", "<cmd>cd %:h<CR>", desc = "CD to opened file's dir" },
+      { "<leader>ar", "yiw:.,$s:<C-r>0::Igc<left><left><left><left>", desc = "Replace repetitive words" },
+      { "<leader>aR", "yiw:.,$s:<C-r>0:<C-r>0:Igc<left><left><left><left>", desc = "Rename repetitive words" },
+      { "<leader>ah", "<cmd>ColorizerToggle<CR>", desc = "Toggle colorizer" },
+      { "<leader>a/", "/[\\u0401\\u0451\\u0410-\\u044f]<CR>", desc = "Highlight russian characters" },
 
-      g = {
-        name = "Git",
-        g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
-        j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-        k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-        L = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
-        l = { "<cmd>Gllog<cr>", "Git log" },
-        h = { "<cmd>0Gllog<cr>", "Git file history" },
-        p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-        r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-        R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-        s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-        u = {
-          "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-          "Undo Stage Hunk",
-        },
-        o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-        b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-        c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-        d = {
-          "<cmd>Gitsigns diffthis HEAD<cr>",
-          "Diff",
-        },
-        f = { ":DiffSave<cr>", "Diff with saved" },
-      },
+      { "<leader>g", group = "Git" },
+      { "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", desc = "Lazygit" },
+      { "<leader>gj", "<cmd>lua require 'gitsigns'.next_hunk()<CR>", desc = "Next Hunk" },
+      { "<leader>gk", "<cmd>lua require 'gitsigns'.prev_hunk()<CR>", desc = "Prev Hunk" },
+      { "<leader>gL", "<cmd>lua require 'gitsigns'.blame_line()<CR>", desc = "Blame" },
+      { "<leader>gl", "<cmd>Gllog<CR>", desc = "Git log" },
+      { "<leader>gh", "<cmd>0Gllog<CR>", desc = "Git file history" },
+      { "<leader>gp", "<cmd>lua require 'gitsigns'.preview_hunk()<CR>", desc = "Preview Hunk" },
+      { "<leader>gr", "<cmd>lua require 'gitsigns'.reset_hunk()<CR>", desc = "Reset Hunk" },
+      { "<leader>gR", "<cmd>lua require 'gitsigns'.reset_buffer()<CR>", desc = "Reset Buffer" },
+      { "<leader>gs", "<cmd>lua require 'gitsigns'.stage_hunk()<CR>", desc = "Stage Hunk" },
+      { "<leader>gu", "<cmd>lua require 'gitsigns'.undo_stage_hunk()<CR>", desc = "Undo Stage Hunk" },
+      { "<leader>go", "<cmd>Telescope git_status<CR>", desc = "Open changed file" },
+      { "<leader>gb", "<cmd>Telescope git_branches<CR>", desc = "Checkout branch" },
+      { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Checkout commit" },
+      { "<leader>gd", "<cmd>Gitsigns diffthis HEAD<CR>", desc = "Diff" },
+      { "<leader>gf", ":DiffSave<CR>", desc = "Diff with saved" },
 
-      l = {
-        name = "LSP",
-        a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-        d = {
-          "<cmd>Telescope lsp_document_diagnostics<cr>",
-          "Document Diagnostics",
-        },
-        w = {
-          "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-          "Workspace Diagnostics",
-        },
-        f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
-        i = { "<cmd>LspInfo<cr>", "Info" },
-        I = { "<cmd>Mason<cr>", "Mason Info" },
-        j = {
-          "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
-          "Next Diagnostic",
-        },
-        k = {
-          "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
-          "Prev Diagnostic",
-        },
-        l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-        q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-        r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-        R = { "<cmd>TSLspRenameFile<cr>", "Rename file" },
-        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-        S = {
-          "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-          "Workspace Symbols",
-        },
-        o = { "<cmd>TSLspOrganizeSync<cr><cmd>lua vim.lsp.buf.format()<cr>", "Organize all imports" },
-      },
+      { "<leader>l", group = "LSP" },
+      { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", desc = "Code Action" },
+      { "<leader>ld", "<cmd>Telescope lsp_document_diagnostics<CR>", desc = "Document Diagnostics" },
+      { "<leader>lw", "<cmd>Telescope lsp_workspace_diagnostics<CR>", desc = "Workspace Diagnostics" },
+      { "<leader>lf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", desc = "Format" },
+      { "<leader>li", "<cmd>LspInfo<CR>", desc = "Info" },
+      { "<leader>lI", "<cmd>Mason<CR>", desc = "Mason Info" },
+      { "<leader>lj", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", desc = "Next Diagnostic" },
+      { "<leader>lk", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", desc = "Prev Diagnostic" },
+      { "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<CR>", desc = "CodeLens Action" },
+      { "<leader>lq", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", desc = "Quickfix" },
+      { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", desc = "Rename" },
+      { "<leader>lR", "<cmd>TSLspRenameFile<CR>", desc = "Rename file" },
+      { "<leader>ls", "<cmd>Telescope lsp_document_symbols<CR>", desc = "Document Symbols" },
+      { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", desc = "Workspace Symbols" },
+      { "<leader>lo", "<cmd>TSLspOrganizeSync<CR><cmd>lua vim.lsp.buf.format()<CR>", desc = "Organize all imports" },
 
-      s = {
-        name = "Search",
-        c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-        h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
-        M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-        r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
-        R = { "<cmd>Telescope registers<cr>", "Registers" },
-        k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-        C = { "<cmd>Telescope commands<cr>", "Commands" },
-        p = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
-        t = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-        l = { "<cmd>Telescope resume<CR>", "Resume telescope" },
-      },
+      { "<leader>s", group = "Search" },
+      { "<leader>sc", "<cmd>Telescope colorscheme<CR>", desc = "Colorscheme" },
+      { "<leader>sh", "<cmd>Telescope help_tags<CR>", desc = "Find Help" },
+      { "<leader>sM", "<cmd>Telescope man_pages<CR>", desc = "Man Pages" },
+      { "<leader>sr", "<cmd>Telescope oldfiles<CR>", desc = "Open Recent File" },
+      { "<leader>sR", "<cmd>Telescope registers<CR>", desc = "Registers" },
+      { "<leader>sk", "<cmd>Telescope keymaps<CR>", desc = "Keymaps" },
+      { "<leader>sC", "<cmd>Telescope commands<CR>", desc = "Commands" },
+      { "<leader>sp", "<cmd>lua require('telescope').extensions.projects.projects()<CR>", desc = "Projects" },
+      { "<leader>st", "<cmd>Telescope live_grep theme=ivy<CR>", desc = "Find Text" },
+      { "<leader>sl", "<cmd>Telescope resume<CR>", desc = "Resume telescope" },
 
-      t = {
-        name = "Terminal",
-        n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
-        u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
-        t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
-        r = { "<cmd>lua _RANGER_TOGGLE()<cr>", "Ranger" },
-        f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-        h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-        v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-      },
-    }
-
-    which_key.setup(setup)
-    which_key.register(mappings, opts)
+      { "<leader>t", group = "Terminal" },
+      { "<leader>tn", "<cmd>lua _NODE_TOGGLE()<CR>", desc = "Node" },
+      { "<leader>tu", "<cmd>lua _NCDU_TOGGLE()<CR>", desc = "NCDU" },
+      { "<leader>tt", "<cmd>lua _HTOP_TOGGLE()<CR>", desc = "Htop" },
+      { "<leader>tr", "<cmd>lua _RANGER_TOGGLE()<CR>", desc = "Ranger" },
+      { "<leader>tf", "<cmd>ToggleTerm direction=float<CR>", desc = "Float" },
+      { "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<CR>", desc = "Horizontal" },
+      { "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<CR>", desc = "Vertical" },
+    })
   end,
 }

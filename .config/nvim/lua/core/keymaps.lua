@@ -17,9 +17,9 @@ vim.g.mapleader = " "
 ------------- NORMAL -------------
 
 -- Improved word replace
--- keymap("n", "ciw", "<cmd>let @/='\\<'.expand('<cword>').'\\>'<cr>\"_ciw", opts)
+-- keymap("n", "ciw", "<cmd>let @/='\\<'.expand('<cword>').'\\>'<CR>\"_ciw", opts)
 -- Disable next keymap in order to fix multiline cut
--- keymap("x", "c", "y<cmd>let @/=substitute(escape(@\", '/[*'), '\\n', '\\\\n', 'g')<cr>\"_cgn", opts)
+-- keymap("x", "c", "y<cmd>let @/=substitute(escape(@\", '/[*'), '\\n', '\\\\n', 'g')<CR>\"_cgn", opts)
 
 -- Don't include whitespaces on ca', ca" and ca`
 keymap("n", "ca'", "c2i'", opts)
@@ -36,7 +36,7 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Append semicolon
-keymap("n", "<S-Cr>", "A;<cr>", opts)
+keymap("n", "<S-CR>", "A;<CR>", opts)
 
 -- Execute node file
 vim.cmd([[
@@ -54,15 +54,15 @@ keymap("n", "<MiddleMouse>", "p", opts)
 keymap("n", "[[", "[{", opts)
 keymap("n", "]]", "]}", opts)
 
-keymap("n", "]{", "/{<cr>:noh<cr>", opts)
-keymap("n", "]}", "/}<cr>:noh<cr>", opts)
-keymap("n", "[{", "?{<cr>:noh<cr>", opts)
-keymap("n", "[}", "?}<cr>:noh<cr>", opts)
+keymap("n", "]{", "/{<CR>:noh<CR>", opts)
+keymap("n", "]}", "/}<CR>:noh<CR>", opts)
+keymap("n", "[{", "?{<CR>:noh<CR>", opts)
+keymap("n", "[}", "?}<CR>:noh<CR>", opts)
 
-keymap("n", "]<", "/<<cr>:noh<cr>", opts)
-keymap("n", "]>", "/><cr>:noh<cr>", opts)
-keymap("n", "[<", "?<<cr>:noh<cr>", opts)
-keymap("n", "[>", "?><cr>:noh<cr>", opts)
+keymap("n", "]<", "/<<CR>:noh<CR>", opts)
+keymap("n", "]>", "/><CR>:noh<CR>", opts)
+keymap("n", "[<", "?<<CR>:noh<CR>", opts)
+keymap("n", "[>", "?><CR>:noh<CR>", opts)
 
 -- Window splitting
 keymap("n", "<C-w>h", "<C-w>s", opts)
@@ -76,7 +76,7 @@ keymap("n", "k", '(v:count > 5 ? "m\'" . v:count : "") . \'k\'', expr_opts)
 keymap("n", "j", '(v:count > 5 ? "m\'" . v:count : "") . \'j\'', expr_opts)
 
 -- Add new line without insert mode (with count)
--- keymap('n', '<leader>o', ':<C-u>call append(line("."), repeat([""], v:count1))<cr>', opts)
+-- keymap('n', '<leader>o', ':<C-u>call append(line("."), repeat([""], v:count1))<CR>', opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
@@ -89,12 +89,12 @@ keymap("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
 keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
 
 -- Move buffers
-keymap("n", "<leader>>", ":BufferLineMoveNext<cr>", opts)
-keymap("n", "<leader><", ":BufferLineMovePrev<cr>", opts)
+keymap("n", "<leader>>", ":BufferLineMoveNext<CR>", opts)
+keymap("n", "<leader><", ":BufferLineMovePrev<CR>", opts)
 
 -- Move text up and down
-keymap("n", "<A-j>", ":m .+1<cr>", opts)
-keymap("n", "<A-k>", ":m .-2<cr>", opts)
+keymap("n", "<A-j>", ":m .+1<CR>", opts)
+keymap("n", "<A-k>", ":m .-2<CR>", opts)
 
 -- Replace default gx handler with custom function to improve its behaviour
 vim.keymap.set("n", "gx", function()
@@ -113,7 +113,7 @@ keymap("i", "?", "?<C-g>u", opts)
 keymap("i", "<C-d>", "<Space><Esc>ce", opts)
 
 -- Append semicolon
-keymap("i", "<S-Cr>", "<Esc>A;<cr>", opts)
+keymap("i", "<S-CR>", "<Esc>A;<CR>", opts)
 
 -- Disable default vim keybindings
 keymap("i", "<C-h>", "<Nop>", opts)
@@ -153,15 +153,15 @@ keymap("x", "<leader>aR", "y:.,$s:<C-r>0:<C-r>0:Igc<left><left><left><left>", op
 keymap("x", "[[", "[{", opts)
 keymap("x", "]]", "]}", opts)
 
-keymap("x", "]{", "/{<cr>", opts)
-keymap("x", "]}", "/}<cr>", opts)
-keymap("x", "[{", "?{<cr>", opts)
-keymap("x", "[}", "?}<cr>", opts)
+keymap("x", "]{", "/{<CR>", opts)
+keymap("x", "]}", "/}<CR>", opts)
+keymap("x", "[{", "?{<CR>", opts)
+keymap("x", "[}", "?}<CR>", opts)
 
-keymap("x", "]<", "/<<cr>", opts)
-keymap("x", "]>", "/><cr>", opts)
-keymap("x", "[<", "?<<cr>", opts)
-keymap("x", "[>", "?><cr>", opts)
+keymap("x", "]<", "/<<CR>", opts)
+keymap("x", "]>", "/><CR>", opts)
+keymap("x", "[<", "?<<CR>", opts)
+keymap("x", "[>", "?><CR>", opts)
 
 -- Replace text without changing register's content
 keymap("x", "p", '"_dP', opts)
