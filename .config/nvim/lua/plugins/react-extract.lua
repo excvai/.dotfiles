@@ -2,16 +2,22 @@ return {
   {
     "napmn/react-extract.nvim",
     config = function()
-      local status_ok, react_extract = pcall(require, "react-extract")
-      if not status_ok then
-        vim.notify("react-extract require failed")
-        return
-      end
+      local react_extract = require("react-extract")
 
       react_extract.setup()
 
-      vim.keymap.set({ "v" }, "<Leader>re", require("react-extract").extract_to_new_file)
-      vim.keymap.set({ "v" }, "<Leader>rc", require("react-extract").extract_to_current_file)
+      vim.keymap.set(
+        { "v" },
+        "<leader>re",
+        require("react-extract").extract_to_new_file,
+        { desc = "Extract to new file" }
+      )
+      vim.keymap.set(
+        { "v" },
+        "<leader>rc",
+        require("react-extract").extract_to_current_file,
+        { desc = "Extract to current file" }
+      )
     end,
   },
 }
