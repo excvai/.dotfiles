@@ -169,7 +169,8 @@ return {
                 -- make the language server aware of runtime files
                 library = {
                   [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                  [vim.fn.stdpath("config") .. "/lua"] = true,
+                  -- Disable in order to avoid lua lsp find multiple location when using stow softlinks
+                  -- [vim.fn.stdpath("config") .. "/lua"] = true,
                 },
               },
             },
