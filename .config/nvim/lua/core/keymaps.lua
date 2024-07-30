@@ -22,6 +22,7 @@ vim.g.mapleader = " "
 -- keymap("x", "c", "y<cmd>let @/=substitute(escape(@\", '/[*'), '\\n', '\\\\n', 'g')<CR>\"_cgn", opts)
 
 -- Don't include whitespaces on ca', ca" and ca`
+-- Use F"cf" in macros instead
 keymap("n", "ca'", "c2i'", opts)
 keymap("n", 'ca"', 'c2i"', opts)
 keymap("n", "ca`", "c2i`", opts)
