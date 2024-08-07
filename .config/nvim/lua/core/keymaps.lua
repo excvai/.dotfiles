@@ -68,10 +68,6 @@ keymap("n", "[>", "?><CR>:noh<CR>", opts)
 -- Window splitting
 keymap("n", "<C-w>h", "<C-w>s", opts)
 
--- Toggle spell check
--- keymap("n", "<F3>", ":set spell!<CR>", opts)
-keymap("n", "<F3>", "ZT", recurs_opts)
-
 -- Jumplist mutations
 keymap("n", "k", '(v:count > 5 ? "m\'" . v:count : "") . \'k\'', expr_opts)
 keymap("n", "j", '(v:count > 5 ? "m\'" . v:count : "") . \'j\'', expr_opts)
