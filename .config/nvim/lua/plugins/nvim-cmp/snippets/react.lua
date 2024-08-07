@@ -45,7 +45,8 @@ local ecma_react_snippets = {
     )
   ),
   p("rmis", "import { styled } from '@mui/material/styles';"),
-  p("rfc", "\nexport const ${TM_FILENAME_BASE} = () => {\n\treturn (\n\t\t$0\n\t)\n}"),
+  p("rafc", "\nexport const ${TM_FILENAME_BASE} = () => {\n\treturn (\n\t\t$0\n\t)\n}"),
+  p("rfc", "\nexport function ${TM_FILENAME_BASE}() {\n\treturn (\n\t\t$0\n\t)\n}"),
   p("trans", "const { t } = useTranslation$0();"),
   p("cn", 'className="$0"')
 }

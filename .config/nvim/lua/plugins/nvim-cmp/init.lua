@@ -32,12 +32,12 @@ return {
       updateevents = "TextChanged,TextChangedI",
     })
 
-    -- Load basic friendly snippets
-    require("luasnip.loaders.from_vscode").lazy_load()
     -- Load custom local snippets
     for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/plugins/nvim-cmp/snippets/*.lua", true)) do
       loadfile(ft_path)()
     end
+    -- Load basic friendly snippets
+    require("luasnip.loaders.from_vscode").lazy_load()
 
     cmp.setup({
       snippet = {
