@@ -30,6 +30,11 @@ keymap("n", "ca`", "c2i`", opts)
 -- Clear highlight on Esc
 keymap("n", "<Esc>", "<cmd>nohlsearch<CR>", opts)
 
+-- Prevent x and Backspace from overriding what's in the clipboard
+keymap("n", "x", '"_x', opts)
+keymap("n", "X", '"_X', opts)
+keymap("x", "<BS>", '"_d', opts)
+
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
