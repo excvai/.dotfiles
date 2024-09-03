@@ -48,7 +48,6 @@ return {
       { "<leader>a/", "/[\\u0401\\u0451\\u0410-\\u044f]<CR>", desc = "Highlight russian characters" },
 
       { "<leader>g", group = "Git" },
-      { "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", desc = "Lazygit" },
       { "<leader>gj", "<cmd>lua require 'gitsigns'.next_hunk()<CR>", desc = "Next Hunk" },
       { "<leader>gk", "<cmd>lua require 'gitsigns'.prev_hunk()<CR>", desc = "Prev Hunk" },
       { "<leader>gL", "<cmd>lua require 'gitsigns'.blame_line()<CR>", desc = "Blame" },
@@ -93,15 +92,6 @@ return {
       { "<leader>sp", "<cmd>lua require('telescope').extensions.projects.projects()<CR>", desc = "Projects" },
       { "<leader>st", "<cmd>Telescope live_grep theme=ivy<CR>", desc = "Find Text" },
       { "<leader>sl", "<cmd>Telescope resume<CR>", desc = "Resume telescope" },
-
-      { "<leader>t", group = "Terminal" },
-      { "<leader>tn", "<cmd>lua _NODE_TOGGLE()<CR>", desc = "Node" },
-      { "<leader>tu", "<cmd>lua _NCDU_TOGGLE()<CR>", desc = "NCDU" },
-      { "<leader>tt", "<cmd>lua _HTOP_TOGGLE()<CR>", desc = "Htop" },
-      { "<leader>tr", "<cmd>lua _RANGER_TOGGLE()<CR>", desc = "Ranger" },
-      { "<leader>tf", "<cmd>ToggleTerm direction=float<CR>", desc = "Float" },
-      { "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<CR>", desc = "Horizontal" },
-      { "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<CR>", desc = "Vertical" },
     })
   end,
 }
