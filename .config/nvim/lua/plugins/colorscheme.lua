@@ -1,3 +1,17 @@
+-- Determines the colorscheme variant to be used based on the system theme
+vim.cmd([[
+if has("mac")
+  let output =  system("defaults read -g AppleInterfaceStyle")
+  if v:shell_error != 0
+    set background=light
+  else    
+    set background=dark
+  endif
+else
+  set background=dark
+endif
+]])
+
 return {
   {
     "rose-pine/neovim",
@@ -36,15 +50,33 @@ return {
           end
         end,
       })
-
-      vim.cmd.colorscheme("rose-pine")
+      -- vim.cmd.colorscheme("rose-pine")
     end,
   },
   {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    opts = {},
+    config = function()
+      require("tokyonight").setup({
+        style = "night",
+        day_brightness = 0.3, -- adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+        on_colors = function(colors)
+          colors.terminal_black = "#64748b" -- use brighter variant to better see unused variables
+          colors.border = "#565f89" -- more clear separator when using multiple windows
+        end,
+        on_highlights = function(hl, c)
+          hl.TelescopePromptBorder = {
+            fg = c.blue3,
+          }
+          hl.TelescopePromptTitle = {
+            fg = c.blue3,
+          }
+          hl.CursorLineNr = { fg = "#c0caf5" } -- use white color to highlight current line number
+        end,
+      })
+      vim.cmd([[colorscheme tokyonight]])
+    end,
   },
   { "catppuccin/nvim", name = "catppuccin", lazy = false, priority = 1000 },
   {
