@@ -1,16 +1,16 @@
 -- Determines the colorscheme variant to be used based on the system theme
-vim.cmd([[
-if has("mac")
-  let output =  system("defaults read -g AppleInterfaceStyle")
-  if v:shell_error != 0
-    set background=light
-  else    
-    set background=dark
-  endif
-else
-  set background=dark
-endif
-]])
+-- vim.cmd([[
+-- if has("mac")
+--   let output =  system("defaults read -g AppleInterfaceStyle")
+--   if v:shell_error != 0
+--     set background=light
+--   else    
+--     set background=dark
+--   endif
+-- else
+--   set background=dark
+-- endif
+-- ]])
 
 return {
   {
