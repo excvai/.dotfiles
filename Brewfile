@@ -12,7 +12,7 @@ brew "node@20"
 brew "ranger"
 brew "ripgrep"
 brew "stow"
-brew "syncthing", restart_service: true
+brew "syncthing", restart_service: :changed
 brew "tldr"
 brew "tmux"
 brew "unar"
