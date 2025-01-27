@@ -53,7 +53,7 @@ return {
         ["<C-f>"] = cmp.mapping.scroll_docs(1),
         ["<C-p>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping.confirm({ select = false }), -- accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<CR>"] = cmp.mapping.confirm({ select = true }), -- accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         ["<C-y>"] = cmp.mapping.confirm({ select = true }),
         ["<C-l>"] = cmp.mapping(function(fallback)
           if luasnip.expandable() then
@@ -89,14 +89,15 @@ return {
           return vim_item
         end,
       },
-      sources = {
+      sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "nvim_lua" },
         { name = "luasnip" },
-        { name = "buffer" },
         { name = "path" },
         { name = "calc" },
-      },
+      }, {
+        { name = "buffer" },
+      }),
       window = {
         documentation = {
           border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },

@@ -24,7 +24,7 @@ return {
         "yamlls",
         "lua_ls",
         "tailwindcss",
-        "tsserver",
+        "ts_ls",
       },
     })
 
