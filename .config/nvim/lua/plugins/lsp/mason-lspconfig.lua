@@ -124,15 +124,15 @@ return {
       highlight_symbol(client, bufnr)
       lsp_overloads(client)
       -- Disable built-in LSP formatters for some servers (to prevent conflicts with none-ls formatters)
-      local disable_lsp_formatting = { "tsserver", "lua_ls", "jsonls", "html" }
+      local disable_lsp_formatting = { "ts_ls", "lua_ls", "jsonls", "html" }
       for _, v in pairs(disable_lsp_formatting) do
         if client.name == v then
           client.server_capabilities.documentFormattingProvider = false
           client.server_capabilities.documentRangeFormattingProvider = false
         end
       end
-      -- Enable tsserver utils
-      if client.name == "tsserver" then
+      -- Enable tsserver(ts_ls) utils
+      if client.name == "ts_ls" then
         local ts_utils = require("nvim-lsp-ts-utils")
         ts_utils.setup({
           filter_out_diagnostics_by_code = { 80001 },
