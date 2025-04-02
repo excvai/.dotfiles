@@ -30,14 +30,17 @@ return {
 
     -- Change the Diagnostic symbols in the sign column (gutter)
     local icons = require("core.icons")
-    local signs = { Error = icons.Error, Warn = icons.Warn, Hint = icons.Hint, Info = icons.Info }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
+    local signs = {
+      [vim.diagnostic.severity.ERROR] = icons.Error,
+      [vim.diagnostic.severity.WARN] = icons.Warn,
+      [vim.diagnostic.severity.HINT] = icons.Hint,
+      [vim.diagnostic.severity.INFO] = icons.Info,
+    }
 
     vim.diagnostic.config({
       severity_sort = true,
+      virtual_text = true,
+      signs = { text = signs },
     })
 
     -- Add borders to the LSP floating windows
