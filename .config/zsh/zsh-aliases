@@ -12,6 +12,8 @@ alias calc="eva"
 alias ls="eza --group-directories-first"
 alias ll="ls -alhF"
 alias ta="tmux attach"
+alias pip="pip3.13"
+alias python="python3.13"
 
 # Vim aliases
 alias v='nvim'

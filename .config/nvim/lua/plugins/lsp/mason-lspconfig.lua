@@ -43,11 +43,6 @@ return {
       signs = { text = signs },
     })
 
-    -- Add borders to the LSP floating windows
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-    vim.lsp.handlers["textDocument/signatureHelp"] =
-      vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-
     local set_keymaps = function(bufnr)
       local keymap = vim.keymap
       local opts = { noremap = true, silent = true, buffer = bufnr }
@@ -75,7 +70,7 @@ return {
       opts.desc = "Go to next diagnostic"
       keymap.set("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ float = { border = "rounded" }})<CR>', opts)
       opts.desc = "Show documentation for what is under cursor"
-      keymap.set("n", "K", vim.lsp.buf.hover, opts)
+      keymap.set("n", "K", '<cmd>lua vim.lsp.buf.hover({ border = "rounded" })<CR>', opts)
       opts.desc = "Show LSP signature help"
       keymap.set("n", "<C-s>", "<cmd>LspOverloadsSignature<CR>", opts)
       keymap.set("i", "<C-s>", "<cmd>LspOverloadsSignature<CR>", opts)
@@ -127,7 +122,26 @@ return {
       highlight_symbol(client, bufnr)
       lsp_overloads(client)
       -- Disable built-in LSP formatters for some servers (to prevent conflicts with none-ls formatters)
-      local disable_lsp_formatting = { "ts_ls", "lua_ls", "jsonls", "html" }
+      -- TODO: use null-ls sources instead of hardcoding them, function 'format' here is just for references
+      -- local function format(buf)
+      --   local null_ls_sources = require("null-ls.sources")
+      --   local ft = vim.bo[buf].filetype
+      --
+      --   local has_null_ls = #null_ls_sources.get_available(ft, "NULL_LS_FORMATTING") > 0
+      --
+      --   vim.lsp.buf.format({
+      --     bufnr = buf,
+      --     filter = function(client)
+      --       if has_null_ls then
+      --         return client.name == "null-ls"
+      --       else
+      --         return true
+      --       end
+      --     end,
+      --   })
+      -- end
+      -- local disable_lsp_formatting = { "ts_ls", "lua_ls", "jsonls", "html" }
+      local disable_lsp_formatting = {}
       for _, v in pairs(disable_lsp_formatting) do
         if client.name == v then
           client.server_capabilities.documentFormattingProvider = false
@@ -171,9 +185,8 @@ return {
               workspace = {
                 -- make the language server aware of runtime files
                 library = {
-                  [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                  -- Disable in order to avoid lua lsp find multiple location when using stow softlinks
-                  -- [vim.fn.stdpath("config") .. "/lua"] = true,
+                  vim.env.VIMRUNTIME,
+                  "${3rd}/luv/library", -- enable this library to remove next warning: Undefined field `fs_stat`
                 },
               },
             },

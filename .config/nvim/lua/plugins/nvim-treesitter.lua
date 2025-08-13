@@ -1,7 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   -- Use specific commit to avoid bug with tsx wrong indentation inside tags
-  commit = "6e0b031ebb212e7082bc3007f8b9614cb393465c",
+  -- commit = "6e0b031ebb212e7082bc3007f8b9614cb393465c",
   event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
   dependencies = {
@@ -9,7 +9,7 @@ return {
     {
       "windwp/nvim-ts-autotag",
       -- Use specific commit as this plugin doesn't work on latest commit
-      commit = "a65b202cfd08e0e69e531eab737205ff5bc082a4",
+      -- commit = "a65b202cfd08e0e69e531eab737205ff5bc082a4",
     },
   },
   config = function()

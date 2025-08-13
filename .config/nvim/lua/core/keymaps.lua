@@ -148,8 +148,53 @@ keymap("x", "<C-c>", "y", opts)
 keymap("x", "<RightMouse>", "y", opts)
 
 -- Rename repetitive selected text
-keymap("x", "<leader>ar", "y:.,$s:<C-r>0::Igc<left><left><left><left>", opts) -- replace
-keymap("x", "<leader>aR", "y:.,$s:<C-r>0:<C-r>0:Igc<left><left><left><left>", opts) -- rename
+-- keymap("x", "<leader>ar", "y:.,$s:<C-r>0::Igc<left><left><left><left>", opts) -- replace
+-- keymap("x", "<leader>aR", "y:.,$s:<C-r>0:<C-r>0:Igc<left><left><left><left>", opts) -- rename
+
+-- keymap("x", "<leader>ac", "*Ncgn<C-r>+", opts)
+vim.keymap.set("v", "<leader>ar", function()
+  -- Yank the selected text to a temporary register
+  vim.cmd('normal! "vy')
+  local word = vim.fn.getreg("v")
+
+  -- Escape special characters for a literal search
+  word = vim.fn.escape(word, [[\/.^$*~[]])
+
+  -- Set the search register and search forward
+  vim.fn.setreg("/", [[\V]] .. word)
+
+  -- Step 2: Feed `cgn` to start replacement
+  vim.api.nvim_feedkeys("cgn", "n", false)
+
+  -- Then insert the clipboard contents
+  vim.defer_fn(function()
+    local keys = vim.api.nvim_replace_termcodes("<C-r>+", true, false, true)
+    vim.api.nvim_feedkeys(keys, "i", false)
+  end, 10) -- slight delay to let 'cgn' enter insert mode
+end, { noremap = true, silent = true })
+-- vim.keymap.set("x", "<leader>ac", function()
+--   -- Yank visual selection into "v" register
+--   vim.cmd('normal! "vy')
+--
+--   -- Get selected text from register
+--   local text = vim.fn.getreg("v")
+--
+--   -- Escape for literal search
+--   text = vim.fn.escape(text, [[\/.^$*~[]])
+--
+--   -- Set search register to match the literal selection
+--   vim.fn.setreg("/", [[\V]] .. text)
+--
+--   -- Start `cgn` change
+--   vim.cmd("normal! N") -- go to previous match (since visual already on one)
+--   vim.api.nvim_feedkeys("cgn", "n", false)
+--
+--   -- Defer the <C-r>+ paste into insert mode
+--   vim.defer_fn(function()
+--     local keys = vim.api.nvim_replace_termcodes("<C-r>+", true, false, true)
+--     vim.api.nvim_feedkeys(keys, "i", false)
+--   end, 10) -- small delay to let cgn enter insert mode
+-- end, { noremap = true, silent = true })
 
 -- Motion alternatives
 keymap("x", "[[", "[{", opts)

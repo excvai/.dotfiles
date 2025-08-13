@@ -68,7 +68,14 @@ return {
       { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", desc = "Code Action" },
       { "<leader>ld", "<cmd>Telescope lsp_document_diagnostics<CR>", desc = "Document Diagnostics" },
       { "<leader>lw", "<cmd>Telescope lsp_workspace_diagnostics<CR>", desc = "Workspace Diagnostics" },
-      { "<leader>lf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", desc = "Format" },
+      {
+        "<leader>lf",
+        function()
+          local bufnr = vim.fn.bufnr()
+          require("plugins.lsp.utils.format").lsp_formatting(bufnr)
+        end,
+        desc = "Format",
+      },
       { "<leader>li", "<cmd>LspInfo<CR>", desc = "Info" },
       { "<leader>lI", "<cmd>Mason<CR>", desc = "Mason Info" },
       { "<leader>lj", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", desc = "Next Diagnostic" },
@@ -79,7 +86,15 @@ return {
       { "<leader>lR", "<cmd>TSLspRenameFile<CR>", desc = "Rename file" },
       { "<leader>ls", "<cmd>Telescope lsp_document_symbols<CR>", desc = "Document Symbols" },
       { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", desc = "Workspace Symbols" },
-      { "<leader>lo", "<cmd>TSLspOrganizeSync<CR><cmd>lua vim.lsp.buf.format()<CR>", desc = "Organize all imports" },
+      {
+        "<leader>lo",
+        function()
+          vim.cmd("TSLspOrganizeSync")
+          local bufnr = vim.fn.bufnr()
+          require("plugins.lsp.utils.format").lsp_formatting(bufnr)
+        end,
+        desc = "Organize all imports",
+      },
 
       { "<leader>s", group = "Search" },
       { "<leader>sc", "<cmd>Telescope colorscheme<CR>", desc = "Colorscheme" },

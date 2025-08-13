@@ -27,6 +27,7 @@ return {
       "^%.next/",
       "^out/",
       "^build/",
+      "__pycache__"
     }
 
     -- Ignore preview of files that are bigger than a threshold
