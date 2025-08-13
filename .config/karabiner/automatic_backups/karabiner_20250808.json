@@ -638,8 +638,15 @@
                         "is_pointing_device": true,
                         "product_id": 273,
                         "vendor_id": 13364
+                    }
+                },
+                {
+                    "identifiers": {
+                        "is_pointing_device": true,
+                        "product_id": 182,
+                        "vendor_id": 5426
                     },
-                    "ignore_vendor_events": true
+                    "ignore": false
                 },
                 {
                     "identifiers": {
@@ -665,8 +672,7 @@
                         "product_id": 183,
                         "vendor_id": 5426
                     },
-                    "ignore": false,
-                    "ignore_vendor_events": true
+                    "ignore": false
                 }
             ],
             "name": "Default profile",

@@ -648,8 +648,7 @@
                         "vendor_id": 13364
                     },
                     "ignore_vendor_events": true,
-                    "manipulate_caps_lock_led": false,
-                    "treat_as_built_in_keyboard": true
+                    "manipulate_caps_lock_led": false
                 },
                 {
                     "identifiers": {

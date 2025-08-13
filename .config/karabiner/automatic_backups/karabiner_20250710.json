@@ -639,25 +639,7 @@
                         "product_id": 273,
                         "vendor_id": 13364
                     },
-                    "ignore_vendor_events": true
-                },
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "product_id": 273,
-                        "vendor_id": 13364
-                    },
-                    "ignore_vendor_events": true,
-                    "manipulate_caps_lock_led": false,
-                    "treat_as_built_in_keyboard": true
-                },
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "product_id": 183,
-                        "vendor_id": 5426
-                    },
-                    "ignore": true
+                    "ignore": false
                 },
                 {
                     "identifiers": {
@@ -665,8 +647,15 @@
                         "product_id": 183,
                         "vendor_id": 5426
                     },
-                    "ignore": false,
-                    "ignore_vendor_events": true
+                    "ignore": false
+                },
+                {
+                    "identifiers": {
+                        "is_pointing_device": true,
+                        "product_id": 182,
+                        "vendor_id": 5426
+                    },
+                    "ignore": false
                 }
             ],
             "name": "Default profile",
