@@ -7,6 +7,9 @@ export XDG_DATA_HOME=$HOME/.local/share
 
 # Configure PATH
 export PATH="$HOME/.local/bin":$PATH
+export PATH=$HOME/development/flutter/bin:$PATH
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
 
 # Default programs
 export EDITOR="nvim"
