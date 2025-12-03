@@ -13,6 +13,7 @@ return {
         -- "prettier" -- installed locally
         "stylua", -- lua formatter
         "eslint_d", -- js linter
+        "black", -- python formatter
       },
     })
 
@@ -29,6 +30,7 @@ return {
           -- disabled_filetypes = { "html" },
         }), -- js/ts formatter
         null_ls.builtins.formatting.stylua, -- lua formatter
+        null_ls.builtins.formatting.black,
         require('none-ls.diagnostics.eslint_d').with({ -- js/ts linter
           condition = function(utils)
             return utils.root_has_file({ ".eslintrc", ".eslintrc.js", ".eslintrc.json", ".eslintrc.cjs" }) -- only enable if root has one of specified files
